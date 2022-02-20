@@ -28,7 +28,7 @@ pygame.display.set_caption('snake game by austin 3:16')
 game_clock = pygame.time.Clock()
 score_increase_per_food = 10
 negative_reward_value = -10
-positive_reward_value = 20
+positive_reward_value = 50
 reward_array = [[0]]
 state_action_array = [ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] ]
 count = [0]
