@@ -27,7 +27,7 @@ screen = pygame.display.set_mode((screen_size_x, screen_size_y))
 pygame.display.set_caption('snake game by austin 3:16')
 game_clock = pygame.time.Clock()
 score_increase_per_food = 10
-negative_reward_value = -10
+negative_reward_value = -50
 positive_reward_value = 10
 reward_array = [[0]]
 state_action_array = [ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] ]
@@ -229,7 +229,7 @@ def policy_Random(previous_direction):
 
 
 def training_function(x_train, y_train):
-    function = MLPRegressor(solver ='adam', alpha=1e-5, hidden_layer_sizes=(20), random_state=1, max_iter=10000).fit(x_train, y_train)
+    function = MLPRegressor(solver ='adam', alpha=1e-5, hidden_layer_sizes=(40), random_state=1, max_iter=10000).fit(x_train, y_train)
     return function
     
 
