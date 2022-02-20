@@ -28,7 +28,7 @@ pygame.display.set_caption('snake game by austin 3:16')
 game_clock = pygame.time.Clock()
 score_increase_per_food = 10
 negative_reward_value = -10
-positive_reward_value = 50
+positive_reward_value = 20
 reward_array = [[0]]
 state_action_array = [ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] ]
 count = [0]
@@ -336,23 +336,9 @@ def should_game_quite():
 
 def to_continue_game(score):
     screen.fill(blue)
-    display_text_on_screen(" GAME OVER. Your score is {}. press Q to quit or P for snake to learn and play a new game".format(score), yellow, 0 , screen_size_y/2, "times new roman", 20)
+    display_text_on_screen("GAME OVER. Your score is {}. wait a moment for game to restart, snake will learn from experience ".format(score), yellow, 0 , screen_size_y/2, "times new roman", 20)
     pygame.display.update()
-    keep_loop = True
-    while keep_loop:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
-
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_q:
-                    decision = False
-                    keep_loop = False
-                if event.key == pygame.K_p:
-                    decision = True
-                    keep_loop = False
-    return decision
+    game_clock.tick(1)   
 
 
 
@@ -371,7 +357,7 @@ def snake_game_loop():
         old_head_position = snake_structure[0]
         present_state = determine_present_state(screen_size_x, screen_size_y, snake_direction, food_position, snake_structure)
         draw_snake_and_fruit(snake_structure, food_position)
-        if (count[0]%2 == 1):
+        if (count[0]%2 == 1 and count[0]<6):
             snake_direction = policy_Random(snake_direction)
             display_text_on_screen(" random policy to aid learning ", yellow, screen_size_x/2,0, "times new roman", 25)
         else:
@@ -401,11 +387,8 @@ def snake_game_loop():
             reward_array.append([reward])
 
         if (check1 == True or check2 == True):
-            check3 = to_continue_game(score)
-            if check3 == False:
-                game_on = False   
-            if check3 == True:
-                snake_game_loop()
+            to_continue_game(score)
+            snake_game_loop()
 
         #display_text_on_screen(" reward is {}".format(reward), yellow, screen_size_x/4,0, "times new roman", 25)
         #display_state_on_screen(state_action_combination, yellow, 0, screen_size_y/2, "times new roman", 20)
