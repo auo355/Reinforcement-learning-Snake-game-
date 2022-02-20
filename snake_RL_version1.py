@@ -28,7 +28,7 @@ pygame.display.set_caption('snake game by austin 3:16')
 game_clock = pygame.time.Clock()
 score_increase_per_food = 10
 negative_reward_value = -10
-positive_reward_value = 50
+positive_reward_value = 10
 reward_array = [[0]]
 state_action_array = [ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] ]
 count = [0]
@@ -357,7 +357,7 @@ def snake_game_loop():
         old_head_position = snake_structure[0]
         present_state = determine_present_state(screen_size_x, screen_size_y, snake_direction, food_position, snake_structure)
         draw_snake_and_fruit(snake_structure, food_position)
-        if (count[0]%2 == 1 and count[0]<6):
+        if (count[0]%2 == 1 and count[0]<10):
             snake_direction = policy_Random(snake_direction)
             display_text_on_screen(" random policy to aid learning ", yellow, screen_size_x/2,0, "times new roman", 25)
         else:
