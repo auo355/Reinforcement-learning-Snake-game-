@@ -151,64 +151,6 @@ def moved_closer_to_food_reward(old_head_position, new_head_position, food_posit
 
 
 
-
-
-def policy_Human_Player(previous_direction):
-    new_direction = previous_direction
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            quit()
-
-        if event.type==pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
-                if previous_direction == 'down':
-                    new_direction = 'down'
-                else:
-                    new_direction = 'up'
-            if event.key == pygame.K_DOWN:
-                if previous_direction == 'up':
-                    new_direction = 'up'
-                else:
-                    new_direction = 'down'
-            if event.key == pygame.K_LEFT:
-                if previous_direction == 'right':
-                    new_direction = 'right'
-                else:
-                    new_direction = 'left'
-            if event.key == pygame.K_RIGHT:
-                if previous_direction == 'left':
-                    new_direction = 'left'
-                else:
-                    new_direction = 'right'
-    return new_direction
-
-
-
-def policy_Focus_On_Food(current_state, current_direction):
-    action = current_direction
-    if abs(current_state[0]) > abs(current_state[1]):
-        if current_state[0]<0:
-            action = 'right'
-        else:
-            action = 'left'
-    else:
-        if current_state[1]>0:
-            action = 'up'
-        else:
-            action = 'down'
-    if (current_direction == 'up' and action == 'down'):
-        action = random.choice(['up', 'left', 'right'])
-    if (current_direction == 'down' and action == 'up'):
-        action = random.choice(['down', 'left', 'right'])
-    if (current_direction == 'left' and action == 'right'):
-        action = random.choice(['up', 'left', 'down'])
-    if (current_direction == 'right' and action == 'left'):
-        action = random.choice(['up', 'down', 'right'])
-    return action
-
-
-
 def policy_Random(previous_direction):                  
     array_of_direction = ['up', 'down', 'left', 'right']
     x = random.choice(array_of_direction)
@@ -223,8 +165,6 @@ def policy_Random(previous_direction):
         x = 'left'
     new_direction = x
     return new_direction
-
-
 
 
 
